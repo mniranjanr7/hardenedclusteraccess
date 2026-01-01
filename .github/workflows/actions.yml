@@ -6,7 +6,7 @@ on:
       - "main"
 jobs:
   create-user-devops:
-   runs_on: ubuntu-latest
+   runs-on: ubuntu-latest
    steps:
     - name: checkout repository
       uses: actions/checkout@v3
