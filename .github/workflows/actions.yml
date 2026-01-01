@@ -1,0 +1,29 @@
+name: DeployUser
+on:
+  worflow_dispatch:
+  push:
+    branches:
+      - "main"
+jobs:
+  create-user-devops:
+   runs_on: ubuntu-latest
+   steps:
+    - name: checkout repository
+      uses: actions/checkout@v3
+
+    - name: setup kubectl
+      uses: azure/setup-kubectl
+
+    - name: setup k8s DeployUser
+      uses: azure/k8s-set-context
+      with:
+        method: kubeconfig
+        kubeconfig: ${{ secrets.KUBECONFIG_DATA }}
+
+    - name: check cluster status
+      run: |
+        kubectl get nodes
+
+    - name: Apply k8s manifests
+      run: |
+        kubectl apply -f k8s/
