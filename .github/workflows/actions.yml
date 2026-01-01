@@ -22,7 +22,7 @@ jobs:
 
     - name: check cluster status
       run: |
-        kubectl get nodes
+        kubectl get pods -n pyro-dev
 
     - name: Apply k8s manifests
       run: |
